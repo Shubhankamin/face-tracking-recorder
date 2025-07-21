@@ -143,54 +143,50 @@ export default function FaceDetection() {
         <button
           onClick={startRecording}
           disabled={isRecording}
-          className="px-6 py-2 bg-green-600 text-white font-semibold rounded-md shadow hover:bg-green-700 disabled:opacity-50 cursor-pointer"
+          className="px-6 py-2 bg-green-600 text-white font-semibold rounded-md shadow hover:bg-green-700 disabled:opacity-50"
         >
           Start Recording
         </button>
         <button
           onClick={stopRecording}
           disabled={!isRecording}
-          className="px-6 py-2 bg-red-600 text-white font-semibold rounded-md shadow hover:bg-red-700 disabled:opacity-50 cursor-pointer"
+          className="px-6 py-2 bg-red-600 text-white font-semibold rounded-md shadow hover:bg-red-700 disabled:opacity-50"
         >
           Stop Recording
         </button>
       </div>
+
+      <button
+        onClick={handleViewSavedVideo}
+        className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700"
+      >
+        View Saved Video
+      </button>
+
       {toast && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 z-50">
           {toast}
         </div>
       )}
 
-      <button
-        onClick={handleViewSavedVideo}
-        className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 cursor-pointer disabled:opacity-50"
-      >
-        View Saved Video
-      </button>
-
-      {isModalOpen && (
-  <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
-    <div className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-xl w-full relative">
-      <div className="flex justify-between items-center p-4 border-b">
-        <h2 className="text-lg font-semibold">Saved Video</h2>
-        <button
-          onClick={() => setIsModalOpen(false)}
-          className="text-gray-500 hover:text-gray-800"
-        >
-          ✕
-        </button>
-      </div>
-      <div className="p-4">
-        <video
-          controls
-          src={savedVideo || ""}
-          className="w-full rounded-lg"
-        />
-      </div>
-    </div>
-  </div>
-)}
-
+      {isModalOpen && savedVideo && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-xl w-full relative">
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-lg font-semibold">Saved Video</h2>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-800"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4">
+              <video controls src={savedVideo} className="w-full rounded-lg" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

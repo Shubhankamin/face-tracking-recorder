@@ -1,9 +1,16 @@
-import WebcamCanvas from "@/components/FaceDetect";
-export default function Home() {
+// /app/page.tsx
+"use client";
+
+import dynamic from "next/dynamic";
+
+const FaceDetection = dynamic(() => import("@/components/FaceDetect"), {
+  ssr: false,
+});
+
+export default function HomePage() {
   return (
-    <main className="p-4">
-      <h1 className="text-2xl font-bold text-center mb-6">Face Detection</h1>
-      <WebcamCanvas />
+    <main className="min-h-screen flex justify-center items-center bg-gray-100">
+      <FaceDetection />
     </main>
   );
 }
